@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-
-import {FaArrowRight} from 'react-icons/fa';
-import {BsThreeDots} from 'react-icons/bs';
+import FontAwesome, {
+  SolidIcons,
+  RegularIcons,
+  BrandIcons,
+} from 'react-native-fontawesome';
 
 export default function Onboarding_1({navigation}) {
   return (
@@ -15,15 +17,16 @@ export default function Onboarding_1({navigation}) {
 
       <View style={styles.bottomArrows}>
         <TouchableOpacity style={styles.buttonStyle}>
-          <BsThreeDots size={32} color="#4A57A3" />
+          <FontAwesome icon={SolidIcons.ellipsisVv} size={32} />
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.buttonStyle}
           onPress={() => {
-            navigation.navigate('onboarding_3');
+            navigation.navigate('Onboarding_2');
           }}>
-          <FaArrowRight size={32} color="#4A57A3" />
+          <Text>Next</Text>
+          {/* <FaArrowRight size={32} color="#4A57A3" /> */}
         </TouchableOpacity>
       </View>
     </View>

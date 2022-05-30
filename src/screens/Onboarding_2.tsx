@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-import {FaArrowRight, FaArrowLeft} from 'react-icons/fa';
-import {BsThreeDots} from 'react-icons/bs';
-
 export default function Onboarding_2({navigation}) {
   return (
     <View style={styles.wrapper}>
@@ -25,19 +22,20 @@ export default function Onboarding_2({navigation}) {
           onPress={() => {
             navigation.goBack();
           }}>
-          <FaArrowLeft size={32} color="#4A57A3" />
+          <Text>Previous</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonStyle}>
-          <BsThreeDots size={32} color="#4A57A3" />
+          <Text>Dots</Text>
+          {/* <BsThreeDots size={32} color="#4A57A3" /> */}
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.buttonStyle}
           onPress={() => {
-            navigation.navigate('onboarding_3');
+            navigation.navigate('Onboarding_3');
           }}>
-          <FaArrowRight size={32} color="#4A57A3" />
+          <Text>Next</Text>
         </TouchableOpacity>
       </View>
     </View>

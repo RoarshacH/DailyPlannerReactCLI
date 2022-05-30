@@ -26,11 +26,11 @@ export default function Onboarding_3({navigation}) {
           onPress={() => {
             navigation.goBack();
           }}>
-          <FaArrowLeft size={32} color="#4A57A3" />
+          <Text>Previous</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonStyle}>
-          <BsThreeDots size={32} color="#4A57A3" />
+          <Text>Dots</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -38,7 +38,7 @@ export default function Onboarding_3({navigation}) {
           onPress={() => {
             navigation.navigate('login');
           }}>
-          <FaArrowRight size={32} color="#4A57A3" />
+          <Text>Next</Text>
         </TouchableOpacity>
       </View>
     </View>
