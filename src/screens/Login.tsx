@@ -9,8 +9,6 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
-import {FaFacebook, FaInstagram, FaTwitter} from 'react-icons/fa';
-
 const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState<String>('');
   const [password, setPassword] = useState<String>('');
@@ -91,15 +89,18 @@ const LoginScreen = ({navigation}) => {
         </Text>
         <View style={styles.signUpRow}>
           <TouchableOpacity style={styles.signUpImages}>
-            <FaFacebook size={38} color="#4A57A3" />
+            {/* <FaFacebook size={38} color="#4A57A3" /> */}
+            <Text>FB</Text>
             {/* <Image style={styles.signUpImages} source={require("./../../assets/images/facebook.png")}></Image> */}
           </TouchableOpacity>
           <TouchableOpacity style={styles.signUpImages}>
-            <FaInstagram size={38} color="#4A57A3" />
+            {/* <FaInstagram size={38} color="#4A57A3" /> */}
+            <Text>IN</Text>
             {/* <Image style={styles.signUpImages} source={require("./../../assets/images/Instagram.png")}></Image> */}
           </TouchableOpacity>
           <TouchableOpacity style={styles.signUpImages}>
-            <FaTwitter size={38} color="#4A57A3" />
+            {/* <FaTwitter size={38} color="#4A57A3" /> */}
+            <Text>TW</Text>
             {/* <Image style={styles.signUpImages} source={require("./../../assets/images/twitter.png")}></Image> */}
           </TouchableOpacity>
         </View>

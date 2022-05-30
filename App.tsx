@@ -76,10 +76,10 @@ const App = () => {
       <MainStack.Navigator
         initialRouteName="Onboarding_1"
         screenOptions={{headerShown: false}}>
-        {/* //     <MainStack.Screen name="login" component={LoginScreen} />
-    //     <MainStack.Screen name="signUp" component={SignUpScreen} />
-    //     <MainStack.Screen name="bottomNav" component={BottomNavigator} />
-    //     <MainStack.Screen name="addTask" component={AddTaskScreen} /> */}
+        <MainStack.Screen name="login" component={LoginScreen} />
+        <MainStack.Screen name="signUp" component={SignUpScreen} />
+        <MainStack.Screen name="bottomNav" component={BottomNavigator} />
+        <MainStack.Screen name="addTask" component={AddTaskScreen} />
         <MainStack.Screen name="Onboarding_1" component={Onboarding_1} />
         <MainStack.Screen name="Onboarding_2" component={Onboarding_2} />
         <MainStack.Screen name="Onboarding_3" component={Onboarding_3} />

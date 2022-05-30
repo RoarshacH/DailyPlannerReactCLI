@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // Fonts
-import {FaHome, FaList, FaRegCalendarAlt, FaSignOutAlt} from 'react-icons/fa';
+// import {FaHome, FaList, FaRegCalendarAlt, FaSignOutAlt} from 'react-icons/fa';
 
 // Pages
 import HomeScreen from '../screens/Home';
@@ -37,7 +37,6 @@ export const BottomNavigator = ({route}) => {
         options={{
           headerShown: false,
           title: 'Home Screen',
-          tabBarIcon: ({color}) => <FaHome size={24} color={'white'} />,
         }}
         initialParams={{username: username}}
       />
@@ -46,7 +45,6 @@ export const BottomNavigator = ({route}) => {
         component={CalandarScreen}
         options={{
           title: 'Calendar View',
-          tabBarIcon: () => <FaRegCalendarAlt size={24} color="white" />,
         }}
       />
       <Tab.Screen
@@ -54,7 +52,6 @@ export const BottomNavigator = ({route}) => {
         component={ScrollViewScreen}
         options={{
           title: 'List All Tasks',
-          tabBarIcon: ({color}) => <FaList size={24} color="white" />,
         }}
       />
       <Tab.Screen
@@ -62,7 +59,6 @@ export const BottomNavigator = ({route}) => {
         component={LogoutScreen}
         options={{
           title: 'Profile',
-          tabBarIcon: () => <FaSignOutAlt size={24} color="white" />,
         }}
       />
     </Tab.Navigator>

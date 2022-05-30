@@ -8,8 +8,6 @@ import {
   Alert,
 } from 'react-native';
 
-import {FaRegCalendarPlus, FaClock} from 'react-icons/fa';
-
 export default function AddTaskScreen({navigation}) {
   return (
     <View style={styles.container}>
@@ -36,7 +34,8 @@ export default function AddTaskScreen({navigation}) {
           activeOpacity={0.5}
           onPress={() => Alert.alert('Pick Date and Time')}>
           <Text style={styles.buttonTextStyle}>
-            <FaRegCalendarPlus size={26} color="white" />
+            Cal
+            {/* <FaRegCalendarPlus size={26} color="white" /> */}
           </Text>
         </TouchableOpacity>
 
@@ -45,7 +44,8 @@ export default function AddTaskScreen({navigation}) {
           activeOpacity={0.5}
           onPress={() => Alert.alert('Pick Date and Time')}>
           <Text style={styles.buttonTextStyle}>
-            <FaClock size={26} color="white" />
+            {/* <FaClock size={26} color="white" /> */}
+            Clock
           </Text>
         </TouchableOpacity>
       </View>
