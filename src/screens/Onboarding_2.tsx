@@ -1,37 +1,43 @@
-import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, {Component} from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-import { FontAwesome5 } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import {FaArrowRight, FaArrowLeft} from 'react-icons/fa';
+import {BsThreeDots} from 'react-icons/bs';
 
-export default function Onboarding_2({ navigation }) {
+export default function Onboarding_2({navigation}) {
   return (
     <View style={styles.wrapper}>
-      <Image style={styles.image} source={require("../../assets/images/Onboard1.png")} />
-      <Text style={{ fontSize: 24, fontWeight: "bold", color: "#4A57A3" }}>Time Management </Text>
-      <Text style={styles.smallText}>Do you find that there is never enough time for everything? If so, it is probably because you are not scheduling your time effectively. </Text>
+      <Image
+        style={styles.image}
+        source={require('../../assets/images/Onboard1.png')}
+      />
+      <Text style={{fontSize: 24, fontWeight: 'bold', color: '#4A57A3'}}>
+        Time Management{' '}
+      </Text>
+      <Text style={styles.smallText}>
+        Do you find that there is never enough time for everything? If so, it is
+        probably because you are not scheduling your time effectively.{' '}
+      </Text>
 
       <View style={styles.bottomArrows}>
         <TouchableOpacity
           style={styles.buttonStyle}
           onPress={() => {
             navigation.goBack();
-          }}
-        >
-          <FontAwesome5 name="arrow-left" size={32} color="#4A57A3" />
+          }}>
+          <FaArrowLeft size={32} color="#4A57A3" />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonStyle}>
-          <Entypo name="dots-three-horizontal" size={32} color="#4A57A3" />
+          <BsThreeDots size={32} color="#4A57A3" />
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.buttonStyle}
           onPress={() => {
-            navigation.navigate("onboarding_3");
-          }}
-        >
-          <FontAwesome5 name="arrow-right" size={32} color="#4A57A3" />
+            navigation.navigate('onboarding_3');
+          }}>
+          <FaArrowRight size={32} color="#4A57A3" />
         </TouchableOpacity>
       </View>
     </View>
@@ -41,10 +47,10 @@ export default function Onboarding_2({ navigation }) {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#D0D0E3",
-    flexDirection: "column",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#D0D0E3',
+    flexDirection: 'column',
   },
   image: {
     padding: 100,
@@ -52,8 +58,8 @@ const styles = StyleSheet.create({
     height: 300,
   },
   font: {
-    color: "blue",
-    fontWeight: "bold",
+    color: 'blue',
+    fontWeight: 'bold',
     fontSize: 38,
   },
   buttonStyle: {
@@ -66,13 +72,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 40,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 16,
-    color: "#4A57A3",
+    color: '#4A57A3',
   },
   bottomArrows: {
-    flexDirection: "row",
-    position: "absolute",
+    flexDirection: 'row',
+    position: 'absolute',
     bottom: 0,
     marginBottom: 50,
   },

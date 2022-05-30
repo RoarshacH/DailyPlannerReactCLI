@@ -37,9 +37,7 @@ export const BottomNavigator = ({route}) => {
         options={{
           headerShown: false,
           title: 'Home Screen',
-          tabBarIcon: ({color}) => (
-            <FaHome name="home" size={24} color={'white'} />
-          ),
+          tabBarIcon: ({color}) => <FaHome size={24} color={'white'} />,
         }}
         initialParams={{username: username}}
       />
@@ -48,9 +46,7 @@ export const BottomNavigator = ({route}) => {
         component={CalandarScreen}
         options={{
           title: 'Calendar View',
-          tabBarIcon: () => (
-            <FaRegCalendarAlt name="calendar" size={24} color="white" />
-          ),
+          tabBarIcon: () => <FaRegCalendarAlt size={24} color="white" />,
         }}
       />
       <Tab.Screen
@@ -58,9 +54,7 @@ export const BottomNavigator = ({route}) => {
         component={ScrollViewScreen}
         options={{
           title: 'List All Tasks',
-          tabBarIcon: ({color}) => (
-            <FaList name="list" size={24} color="white" />
-          ),
+          tabBarIcon: ({color}) => <FaList size={24} color="white" />,
         }}
       />
       <Tab.Screen
@@ -68,9 +62,7 @@ export const BottomNavigator = ({route}) => {
         component={LogoutScreen}
         options={{
           title: 'Profile',
-          tabBarIcon: () => (
-            <FaSignOutAlt name="log-out" size={24} color="white" />
-          ),
+          tabBarIcon: () => <FaSignOutAlt size={24} color="white" />,
         }}
       />
     </Tab.Navigator>

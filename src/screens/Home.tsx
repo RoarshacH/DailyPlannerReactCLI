@@ -1,22 +1,29 @@
-import React, { useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView } from "react-native";
+import React, {useState} from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from 'react-native';
 
-import Header from "../components/Header";
-import ListItem from "../components/ListItem";
-import { IToDo } from "../resources/ITToDo";
+import Header from '../components/Header';
+import ListItem from '../components/ListItem';
+import {IToDo} from '../resources/ITToDo';
 
-const HomeScreen = ({ navigation, route, props }) => {
+const HomeScreen = ({navigation, route, props}) => {
   const username = route.params.username;
   const [toDoList, setToDos] = useState<IToDo[]>([
-    { text: "Upcoming Deadline", completed: false, date: "Time: HH:MM - DD:MM" },
-    { text: "Upcoming Deadline", completed: false, date: "Time: HH:MM - DD:MM" },
-    { text: "Upcoming Deadline", completed: false, date: "Time: HH:MM - DD:MM" },
-    { text: "Upcoming Deadline", completed: false, date: "Time: HH:MM - DD:MM" },
-    { text: "Upcoming Deadline", completed: false, date: "Time: HH:MM - DD:MM" },
-    { text: "Upcoming Deadline", completed: false, date: "Time: HH:MM - DD:MM" },
-    { text: "Upcoming Deadline", completed: false, date: "Time: HH:MM - DD:MM" },
-    { text: "Upcoming Deadline", completed: false, date: "Time: HH:MM - DD:MM" },
-    { text: "Upcoming Deadline", completed: false, date: "Time: HH:MM - DD:MM" },
+    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
+    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
+    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
+    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
+    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
+    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
+    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
+    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
+    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
   ]);
 
   const toggleComplete = (index: number): void => {
@@ -29,10 +36,19 @@ const HomeScreen = ({ navigation, route, props }) => {
     <View style={styles.wrapper}>
       <Header headerTitle={username}></Header>
 
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{flex: 1}}>
         <View style={styles.bodyTop}>
           {toDoList.map((toDo: IToDo, index: number) => {
-            return <ListItem key={index} index={index} title={toDo.text} date={toDo.date} completed={toDo.completed} toggleComplete={toggleComplete} />;
+            return (
+              <ListItem
+                key={index}
+                index={index}
+                title={toDo.text}
+                date={toDo.date}
+                completed={toDo.completed}
+                toggleComplete={toggleComplete}
+              />
+            );
           })}
         </View>
       </ScrollView>
@@ -41,10 +57,11 @@ const HomeScreen = ({ navigation, route, props }) => {
         <TouchableOpacity
           style={styles.roundButton}
           onPress={() => {
-            navigation.push("addTask");
-          }}
-        >
-          <Image style={styles.imagebutton} source={require("./../../assets/images/fabImageAlt.png")}></Image>
+            navigation.push('addTask');
+          }}>
+          <Image
+            style={styles.imagebutton}
+            source={require('./../../assets/images/fabImageAlt.png')}></Image>
         </TouchableOpacity>
       </View>
     </View>
@@ -54,19 +71,19 @@ const HomeScreen = ({ navigation, route, props }) => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: "white",
-    flexDirection: "column",
+    backgroundColor: 'white',
+    flexDirection: 'column',
   },
   bodyTop: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: "5%",
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: '5%',
   },
   bodyBottom: {
     height: 80,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imagebutton: {
     borderRadius: 50,
@@ -77,10 +94,10 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     height: 40,
     width: 40,
-    position: "relative",
+    position: 'relative',
     bottom: 0,
     right: -150,
-    backgroundColor: "#4A57A3",
+    backgroundColor: '#4A57A3',
   },
 });
 
