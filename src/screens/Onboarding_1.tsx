@@ -1,10 +1,9 @@
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import FontAwesome, {
-  SolidIcons,
-  RegularIcons,
-  BrandIcons,
-} from 'react-native-fontawesome';
+
+import AntIcon from 'react-native-vector-icons/AntDesign';
+import Encypto from 'react-native-vector-icons/Entypo';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function Onboarding_1({navigation}) {
   return (
@@ -17,7 +16,7 @@ export default function Onboarding_1({navigation}) {
 
       <View style={styles.bottomArrows}>
         <TouchableOpacity style={styles.buttonStyle}>
-          <FontAwesome icon={SolidIcons.ellipsisVv} size={32} />
+          <Encypto name="dots-three-horizontal" size={32} />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -25,8 +24,7 @@ export default function Onboarding_1({navigation}) {
           onPress={() => {
             navigation.navigate('Onboarding_2');
           }}>
-          <Text>Next</Text>
-          {/* <FaArrowRight size={32} color="#4A57A3" /> */}
+          <AntIcon name="arrowright" size={32} />
         </TouchableOpacity>
       </View>
     </View>

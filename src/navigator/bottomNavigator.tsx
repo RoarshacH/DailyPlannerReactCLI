@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // Fonts
-// import {FaHome, FaList, FaRegCalendarAlt, FaSignOutAlt} from 'react-icons/fa';
+import AntIcon from 'react-native-vector-icons/AntDesign';
 
 // Pages
 import HomeScreen from '../screens/Home';
@@ -14,7 +14,6 @@ const Tab = createBottomTabNavigator();
 
 export const BottomNavigator = ({route}) => {
   const username = route.params.username;
-
   return (
     <Tab.Navigator
       initialRouteName={'home'}
@@ -37,6 +36,7 @@ export const BottomNavigator = ({route}) => {
         options={{
           headerShown: false,
           title: 'Home Screen',
+          tabBarIcon: ({color}) => <AntIcon name="home" size={32} />,
         }}
         initialParams={{username: username}}
       />
@@ -45,6 +45,7 @@ export const BottomNavigator = ({route}) => {
         component={CalandarScreen}
         options={{
           title: 'Calendar View',
+          tabBarIcon: ({color}) => <AntIcon name="calendar" size={32} />,
         }}
       />
       <Tab.Screen
@@ -52,6 +53,7 @@ export const BottomNavigator = ({route}) => {
         component={ScrollViewScreen}
         options={{
           title: 'List All Tasks',
+          tabBarIcon: ({color}) => <AntIcon name="profile" size={32} />,
         }}
       />
       <Tab.Screen
@@ -59,6 +61,7 @@ export const BottomNavigator = ({route}) => {
         component={LogoutScreen}
         options={{
           title: 'Profile',
+          tabBarIcon: ({color}) => <AntIcon name="logout" size={32} />,
         }}
       />
     </Tab.Navigator>

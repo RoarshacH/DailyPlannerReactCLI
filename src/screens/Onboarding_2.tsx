@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import AntIcon from 'react-native-vector-icons/AntDesign';
+import Encypto from 'react-native-vector-icons/Entypo';
 
 export default function Onboarding_2({navigation}) {
   return (
@@ -22,12 +24,11 @@ export default function Onboarding_2({navigation}) {
           onPress={() => {
             navigation.goBack();
           }}>
-          <Text>Previous</Text>
+          <AntIcon name="arrowleft" size={32} />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonStyle}>
-          <Text>Dots</Text>
-          {/* <BsThreeDots size={32} color="#4A57A3" /> */}
+          <Encypto name="dots-three-horizontal" size={32} />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -35,7 +36,7 @@ export default function Onboarding_2({navigation}) {
           onPress={() => {
             navigation.navigate('Onboarding_3');
           }}>
-          <Text>Next</Text>
+          <AntIcon name="arrowright" size={32} />
         </TouchableOpacity>
       </View>
     </View>
