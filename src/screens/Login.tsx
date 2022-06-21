@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
 } from 'react-native';
+import Encypto from 'react-native-vector-icons/Entypo';
+import AntIcon from 'react-native-vector-icons/AntDesign';
 
 const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState<String>('');
@@ -89,19 +91,13 @@ const LoginScreen = ({navigation}) => {
         </Text>
         <View style={styles.signUpRow}>
           <TouchableOpacity style={styles.signUpImages}>
-            {/* <FaFacebook size={38} color="#4A57A3" /> */}
-            <Text>FB</Text>
-            {/* <Image style={styles.signUpImages} source={require("./../../assets/images/facebook.png")}></Image> */}
+            <Encypto name="facebook" size={32} color="#4A57A3" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.signUpImages}>
-            {/* <FaInstagram size={38} color="#4A57A3" /> */}
-            <Text>IN</Text>
-            {/* <Image style={styles.signUpImages} source={require("./../../assets/images/Instagram.png")}></Image> */}
+            <Encypto name="twitter" size={32} color="#4A57A3" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.signUpImages}>
-            {/* <FaTwitter size={38} color="#4A57A3" /> */}
-            <Text>TW</Text>
-            {/* <Image style={styles.signUpImages} source={require("./../../assets/images/twitter.png")}></Image> */}
+            <AntIcon name="google" size={32} color="#4A57A3" />
           </TouchableOpacity>
         </View>
       </View>

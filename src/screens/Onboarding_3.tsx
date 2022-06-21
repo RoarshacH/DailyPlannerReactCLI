@@ -25,11 +25,11 @@ export default function Onboarding_3({navigation}) {
           onPress={() => {
             navigation.goBack();
           }}>
-          <AntIcon name="arrowleft" size={32} />
+          <AntIcon name="arrowleft" size={32} color="#4A57A3" />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonStyle}>
-          <Encypto name="dots-three-horizontal" size={32} />
+          <Encypto name="dots-three-horizontal" size={32} color="#4A57A3" />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -37,7 +37,7 @@ export default function Onboarding_3({navigation}) {
           onPress={() => {
             navigation.navigate('login');
           }}>
-          <AntIcon name="arrowright" size={32} />
+          <AntIcon name="arrowright" size={32} color="#4A57A3" />
         </TouchableOpacity>
       </View>
     </View>

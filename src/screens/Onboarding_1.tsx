@@ -15,7 +15,7 @@ export default function Onboarding_1({navigation}) {
 
       <View style={styles.bottomArrows}>
         <TouchableOpacity style={styles.buttonStyle}>
-          <Encypto name="dots-three-horizontal" size={32} />
+          <Encypto name="dots-three-horizontal" size={32} color="#4A57A3" />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -23,7 +23,7 @@ export default function Onboarding_1({navigation}) {
           onPress={() => {
             navigation.navigate('Onboarding_2');
           }}>
-          <AntIcon name="arrowright" size={32} />
+          <AntIcon name="arrowright" size={32} color="#4A57A3" />
         </TouchableOpacity>
       </View>
     </View>

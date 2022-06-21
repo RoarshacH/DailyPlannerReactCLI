@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import AntIcon from 'react-native-vector-icons/AntDesign';
 
 export default function AddTaskScreen({navigation}) {
   return (
@@ -15,15 +16,15 @@ export default function AddTaskScreen({navigation}) {
         {'\n'} {'\n'} Add your task {'\n'}{' '}
       </Text>
 
-      <Text>Enter Task Title</Text>
+      <Text style={styles.textStyle}>Enter Task Title</Text>
 
       <TextInput style={styles.input} />
 
-      <Text> Enter Task Priority </Text>
+      <Text style={styles.textStyle}> Enter Task Priority </Text>
 
       <TextInput style={styles.input} />
 
-      <Text>Any Notes?</Text>
+      <Text style={styles.textStyle}>Any Notes?</Text>
 
       <TextInput style={styles.notes} />
 
@@ -34,8 +35,7 @@ export default function AddTaskScreen({navigation}) {
           activeOpacity={0.5}
           onPress={() => Alert.alert('Pick Date and Time')}>
           <Text style={styles.buttonTextStyle}>
-            Cal
-            {/* <FaRegCalendarPlus size={26} color="white" /> */}
+            <AntIcon name="calendar" size={28} />
           </Text>
         </TouchableOpacity>
 
@@ -44,8 +44,7 @@ export default function AddTaskScreen({navigation}) {
           activeOpacity={0.5}
           onPress={() => Alert.alert('Pick Date and Time')}>
           <Text style={styles.buttonTextStyle}>
-            {/* <FaClock size={26} color="white" /> */}
-            Clock
+            <AntIcon name="clockcircleo" size={28} />
           </Text>
         </TouchableOpacity>
       </View>
@@ -88,6 +87,7 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 350,
     borderRadius: 10,
+    color: '#4A57A3',
   },
   notes: {
     borderWidth: 1,
@@ -98,10 +98,16 @@ const styles = StyleSheet.create({
     width: 350,
     height: 100,
     borderRadius: 10,
+    color: '#4A57A3',
   },
   size: {
     marginTop: 50,
     fontSize: 30,
+    color: '#4A57A3',
+  },
+  textStyle: {
+    fontSize: 18,
+    color: '#4A57A3',
   },
 
   buttonStyle: {
