@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Platform} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // Fonts
@@ -27,7 +28,11 @@ export const BottomNavigator = ({route}) => {
           color: 'white',
           fontSize: 24,
         },
-        tabBarStyle: {backgroundColor: '#4A57A3', padding: 2, height: 60},
+        tabBarStyle: {
+          backgroundColor: '#4A57A3',
+          padding: 2,
+          height: Platform.OS === 'android' ? 60 : 120,
+        },
         tabBarActiveTintColor: 'white',
       }}>
       <Tab.Screen
