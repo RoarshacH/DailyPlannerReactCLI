@@ -3,7 +3,6 @@ import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import Encypto from 'react-native-vector-icons/Entypo';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function Onboarding_1({navigation}) {
   return (
