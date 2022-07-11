@@ -7,9 +7,12 @@ import {
   Image,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
 import Encypto from 'react-native-vector-icons/Entypo';
 import AntIcon from 'react-native-vector-icons/AntDesign';
+
+import {singInUserFirebase} from '../services/apiService';
 
 const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState<String>('');
@@ -21,7 +24,8 @@ const LoginScreen = ({navigation}) => {
     setError(false);
     setErrorMsg('');
   };
-  const handleLogin = () => {
+
+  async function handleLogin() {
     if (username === '') {
       setErrorMsg('Username is Empty');
       setError(true);
@@ -34,12 +38,33 @@ const LoginScreen = ({navigation}) => {
     }
     setErrorMsg('');
     setError(false);
+    try {
+      await singInUserFirebase(username, password)
+        .then(userCred => {
+          Alert.alert('Login Success');
+          console.log(userCred.user.uid);
+          // loadUserProfile(userCred.user.uid);
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            console.log('That email address is already in use!');
+          }
+
+          if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+          }
+
+          console.error(error);
+        });
+    } catch (error) {
+      Alert.alert(`Error ${error}`);
+    }
 
     navigation.reset({
       index: 0,
       routes: [{name: 'bottomNav', params: {username, password}}],
     });
-  };
+  }
   return (
     <View style={styles.mainBody}>
       <View>

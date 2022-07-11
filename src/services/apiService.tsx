@@ -42,3 +42,15 @@ export function sleep(ms) {
     setTimeout(resolve, ms);
   });
 }
+
+// Firebase Authentication Functions
+export async function signupUserFirebase(username, password): Promise<any> {
+  return auth().createUserWithEmailAndPassword(username, password);
+}
+
+export async function singInUserFirebase(
+  username: String,
+  password: String,
+): Promise<any> {
+  return auth().signInWithEmailAndPassword(username, password);
+}
