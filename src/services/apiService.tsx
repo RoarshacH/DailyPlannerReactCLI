@@ -1,6 +1,8 @@
 const USERNAME = 'Jane';
 const PASS = '12345';
 
+import auth from '@react-native-firebase/auth';
+
 export async function signUP(username: string, password: string, callback) {
   await sleep(2000);
   if (username === USERNAME && password === PASS) {
@@ -44,7 +46,10 @@ export function sleep(ms) {
 }
 
 // Firebase Authentication Functions
-export async function signupUserFirebase(username, password): Promise<any> {
+export async function signupUserFirebase(
+  username: String,
+  password: String,
+): Promise<any> {
   return auth().createUserWithEmailAndPassword(username, password);
 }
 
@@ -53,4 +58,8 @@ export async function singInUserFirebase(
   password: String,
 ): Promise<any> {
   return auth().signInWithEmailAndPassword(username, password);
+}
+
+export async function singOutUserFirebase(): Promise<any> {
+  return auth().signOut();
 }

@@ -43,7 +43,11 @@ const LoginScreen = ({navigation}) => {
         .then(userCred => {
           Alert.alert('Login Success');
           console.log(userCred.user.uid);
-          // loadUserProfile(userCred.user.uid);
+          const displayName = userCred.user.displayName;
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'bottomNav', params: {displayName, password}}],
+          });
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
@@ -59,11 +63,6 @@ const LoginScreen = ({navigation}) => {
     } catch (error) {
       Alert.alert(`Error ${error}`);
     }
-
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'bottomNav', params: {username, password}}],
-    });
   }
   return (
     <View style={styles.mainBody}>
