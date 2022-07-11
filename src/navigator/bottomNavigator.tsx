@@ -31,7 +31,7 @@ export const BottomNavigator = ({route}) => {
         tabBarStyle: {
           backgroundColor: '#4A57A3',
           padding: 2,
-          height: Platform.OS === 'android' ? 60 : 120,
+          height: Platform.OS === 'android' ? 60 : 100,
         },
         tabBarActiveTintColor: 'white',
       }}>
