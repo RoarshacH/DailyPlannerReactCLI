@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Image, Platform} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import Encypto from 'react-native-vector-icons/Entypo';
+
+
+if (Platform.OS === 'ios'){
+  //Load fonts if using use_frameworks
+  AntIcon.loadFont();
+  Encypto.loadFont();
+}
 
 export default function Onboarding_3({navigation}) {
   return (
