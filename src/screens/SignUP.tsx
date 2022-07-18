@@ -45,7 +45,7 @@ const SignUpScreen = ({navigation}) => {
     setError(false);
 
     try {
-      await signupUserFirebase(username, password)
+      await signupUserFirebase(email, password)
         .then(() => {
           Alert.alert('User Created Successfully');
           navigation.reset({

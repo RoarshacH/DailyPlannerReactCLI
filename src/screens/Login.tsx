@@ -8,9 +8,18 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Alert,
+  Platform
 } from 'react-native';
 import Encypto from 'react-native-vector-icons/Entypo';
 import AntIcon from 'react-native-vector-icons/AntDesign';
+
+if (Platform.OS === 'ios'){
+  //Load fonts if using use_frameworks
+  AntIcon.loadFont();
+  Encypto.loadFont();
+}
+
+
 
 import {singInUserFirebase} from '../services/apiService';
 
@@ -43,7 +52,11 @@ const LoginScreen = ({navigation}) => {
         .then(userCred => {
           Alert.alert('Login Success');
           console.log(userCred.user.uid);
-          // loadUserProfile(userCred.user.uid);
+          const displayName = userCred.user.displayName;
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'bottomNav', params: {displayName, password}}],
+          });
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
@@ -59,11 +72,6 @@ const LoginScreen = ({navigation}) => {
     } catch (error) {
       Alert.alert(`Error ${error}`);
     }
-
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'bottomNav', params: {username, password}}],
-    });
   }
   return (
     <View style={styles.mainBody}>

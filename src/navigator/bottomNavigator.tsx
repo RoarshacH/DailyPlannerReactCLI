@@ -5,6 +5,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // Fonts
 import AntIcon from 'react-native-vector-icons/AntDesign';
 
+if (Platform.OS === 'ios'){
+  //Load fonts if using use_frameworks
+  AntIcon.loadFont();
+}
+
 // Pages
 import HomeScreen from '../screens/Home';
 import ScrollViewScreen from '../screens/Scrolling';

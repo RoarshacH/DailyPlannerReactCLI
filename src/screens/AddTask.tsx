@@ -6,8 +6,14 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  Platform
 } from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
+
+if (Platform.OS === 'ios'){
+  //Load fonts if using use_frameworks
+  AntIcon.loadFont();
+}
 
 export default function AddTaskScreen({navigation}) {
   return (
