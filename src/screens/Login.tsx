@@ -8,18 +8,16 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Alert,
-  Platform
+  Platform,
 } from 'react-native';
 import Encypto from 'react-native-vector-icons/Entypo';
 import AntIcon from 'react-native-vector-icons/AntDesign';
-
-if (Platform.OS === 'ios'){
+import {validateEmail} from '../helpers';
+if (Platform.OS === 'ios') {
   //Load fonts if using use_frameworks
   AntIcon.loadFont();
   Encypto.loadFont();
 }
-
-
 
 import {singInUserFirebase} from '../services/apiService';
 
@@ -36,12 +34,17 @@ const LoginScreen = ({navigation}) => {
 
   async function handleLogin() {
     if (username === '') {
-      setErrorMsg('Username is Empty');
+      setErrorMsg('Email is Empty');
       setError(true);
       return;
     }
     if (password === '') {
       setErrorMsg('Password is Empty');
+      setError(true);
+      return;
+    }
+    if (!validateEmail(username)) {
+      setErrorMsg('Email is Inorrect');
       setError(true);
       return;
     }
@@ -59,14 +62,9 @@ const LoginScreen = ({navigation}) => {
           });
         })
         .catch(error => {
-          if (error.code === 'auth/email-already-in-use') {
-            console.log('That email address is already in use!');
-          }
-
           if (error.code === 'auth/invalid-email') {
-            console.log('That email address is invalid!');
+            Alert.alert('Invalid Email');
           }
-
           console.error(error);
         });
     } catch (error) {
