@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
+import {validateEmail} from '../helpers';
 import {signupUserFirebase} from '../services/apiService';
 
 const SignUpScreen = ({navigation}) => {
@@ -41,6 +42,11 @@ const SignUpScreen = ({navigation}) => {
       setError(true);
       return;
     }
+    if (!validateEmail(email)) {
+      setErrorMsg('Email is Inorrect');
+      setError(true);
+      return;
+    }
     setErrorMsg('');
     setError(false);
 
@@ -55,11 +61,11 @@ const SignUpScreen = ({navigation}) => {
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
-            console.log('That email address is already in use!');
+            Alert.alert('That email address is already in use!');
           }
 
           if (error.code === 'auth/invalid-email') {
-            console.log('That email address is invalid!');
+            Alert.alert('That email address is invalid!!');
           }
 
           console.error(error);
