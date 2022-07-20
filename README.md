@@ -3,11 +3,6 @@
 
   <h1>Daily Planner</h1>
   
-  <p>
- 
-  </p>
-  
-  
 
 <br />
 
@@ -18,10 +13,12 @@ Having a convenient way to create a schedule for the day/week and adding all the
 
 
 <!-- Screenshots -->
-### :camera: Screenshots
+### :camera: App Demos
 
-<div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+<div align="center">   
+  <a href= "https://youtu.be/JCSuSoDB0gU">Running The App on Android</a> <br>
+  <a href="https://youtu.be/7ZWd-pl5-Mo">Running The App on iOS</a> <br>
+  <a href="https://youtu.be/CGFcDhZm7rs">Building The App for Android</a>
 </div>
 
 
@@ -37,9 +34,9 @@ React Native Calandar
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Primary Color | San Marino #4A56A3 |
-| Secondary Color | Blue Haze #FFFFFF |
-| Filling Color | White #D0D0E3 |
+| Primary Color | San Marino `#4A56A3` |
+| Secondary Color | Blue Haze `#D0D0E3`|
+| Filling Color | White `#FFFFFF` |
 
 
 <!-- Getting Started -->
@@ -53,7 +50,7 @@ This project uses Yarn as package manager or npm
 you need to have installed yarn or npm as packge managers on your pc
 <p>This is a React Native CLI Project you need to have configured REACT development environment to run this project  </p>
 
- ![REACT CLI Configuration](https://reactnative.dev/docs/environment-setup)
+[REACT CLI Configuration](https://reactnative.dev/docs/environment-setup)
 
 
 
