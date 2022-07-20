@@ -55,10 +55,9 @@ const LoginScreen = ({navigation}) => {
         .then(userCred => {
           Alert.alert('Login Success');
           console.log(userCred.user.uid);
-          const displayName = userCred.user.displayName;
           navigation.reset({
             index: 0,
-            routes: [{name: 'bottomNav', params: {displayName, password}}],
+            routes: [{name: 'bottomNav', params: {username, password}}],
           });
         })
         .catch(error => {
