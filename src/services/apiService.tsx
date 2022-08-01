@@ -26,9 +26,18 @@ export async function singOutUserFirebase(): Promise<any> {
 }
 
 export async function fetchUser(userId: String): Promise<any> {
-  return {
-    username: 'Random Name',
-    email: 'user@user.com',
-    userId: userId,
-  };
+  const user = auth().currentUser;
+  if (user) {
+    return {
+      username: 'Random Name',
+      email: user.email,
+      userId: userId,
+    };
+  } else {
+    return {
+      username: 'Test User',
+      email: 'user@user.com',
+      userId: userId,
+    };
+  }
 }

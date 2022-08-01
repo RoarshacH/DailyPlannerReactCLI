@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Encypto from 'react-native-vector-icons/Entypo';
 import AntIcon from 'react-native-vector-icons/AntDesign';
-import {validateEmail} from '../helpers';
+import {validateInputsLogin} from '../helpers';
 if (Platform.OS === 'ios') {
   //Load fonts if using use_frameworks
   AntIcon.loadFont();
@@ -21,7 +21,6 @@ if (Platform.OS === 'ios') {
 
 import {fetchUser, singInUserFirebase} from '../services/apiService';
 import {useAppData} from '../providers/AppState';
-import {User} from '../resources/ITUser';
 
 const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState<String>('');
@@ -36,19 +35,10 @@ const LoginScreen = ({navigation}) => {
   };
 
   async function handleLogin() {
-    if (username === '') {
-      setErrorMsg('Email is Empty');
-      setError(true);
-      return;
-    }
-    if (password === '') {
-      setErrorMsg('Password is Empty');
-      setError(true);
-      return;
-    }
-    if (!validateEmail(username)) {
-      setErrorMsg('Email is Inorrect');
-      setError(true);
+    const result = validateInputsLogin(username, password);
+    if (result.error) {
+      setErrorMsg(result.msg);
+      setError(result.error);
       return;
     }
     setErrorMsg('');
@@ -73,16 +63,10 @@ const LoginScreen = ({navigation}) => {
   }
   async function loadUser(userID: String, email: String) {
     const loadedUser = await fetchUser(userID);
-    const newUser: User = {
-      email: email.toString(),
-      userId: userID.toString(),
-      username: 'Vidusha Dilshan',
-    };
-    if (!newUser) {
+    if (!loadedUser) {
       return;
     }
-    setActiveUser(newUser);
-    console.log(newUser);
+    setActiveUser(loadedUser);
     navigation.reset({
       index: 0,
       routes: [{name: 'bottomNav', params: {username, password}}],
