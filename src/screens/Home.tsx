@@ -13,12 +13,8 @@ import ListItem from '../components/ListItem';
 import {useAppData} from '../providers/AppState';
 import {IToDo} from '../resources/ITToDo';
 
-const HomeScreen = ({navigation, props}) => {
+const HomeScreen = ({navigation}) => {
   const [toDoList, setToDos] = useState<IToDo[]>([
-    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
-    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
-    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
-    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
     {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
     {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
     {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
