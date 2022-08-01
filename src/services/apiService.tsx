@@ -1,6 +1,3 @@
-const USERNAME = 'Jane';
-const PASS = '12345';
-
 import auth from '@react-native-firebase/auth';
 
 export function sleep(ms) {
@@ -26,4 +23,12 @@ export async function singInUserFirebase(
 
 export async function singOutUserFirebase(): Promise<any> {
   return auth().signOut();
+}
+
+export async function fetchUser(userId: String): Promise<any> {
+  return {
+    username: 'Random Name',
+    email: 'user@user.com',
+    userId: userId,
+  };
 }

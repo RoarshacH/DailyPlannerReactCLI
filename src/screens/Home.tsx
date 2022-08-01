@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Text,
   View,
@@ -10,6 +10,7 @@ import {
 
 import Header from '../components/Header';
 import ListItem from '../components/ListItem';
+import {AppStateContext, useAppData} from '../providers/AppState';
 import {IToDo} from '../resources/ITToDo';
 
 const HomeScreen = ({navigation, route, props}) => {
@@ -25,6 +26,7 @@ const HomeScreen = ({navigation, route, props}) => {
     {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
     {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
   ]);
+  const {activeUser} = useAppData();
 
   const toggleComplete = (index: number): void => {
     const newToDoList = [...toDoList];
@@ -34,8 +36,7 @@ const HomeScreen = ({navigation, route, props}) => {
 
   return (
     <View style={styles.wrapper}>
-      <Header headerTitle={username}></Header>
-
+      <Header headerTitle={activeUser.email}></Header>
       <ScrollView style={{flex: 1}}>
         <View style={styles.bodyTop}>
           {toDoList.map((toDo: IToDo, index: number) => {

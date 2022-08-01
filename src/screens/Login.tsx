@@ -19,13 +19,16 @@ if (Platform.OS === 'ios') {
   Encypto.loadFont();
 }
 
-import {singInUserFirebase} from '../services/apiService';
+import {fetchUser, singInUserFirebase} from '../services/apiService';
+import {useAppData} from '../providers/AppState';
+import {User} from '../resources/ITUser';
 
 const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState<String>('');
   const [password, setPassword] = useState<String>('');
   const [error, setError] = useState<Boolean>(false);
   const [errorMsg, setErrorMsg] = useState<String>('');
+  const {setActiveUser} = useAppData();
 
   const resetError = () => {
     setError(false);
@@ -54,11 +57,9 @@ const LoginScreen = ({navigation}) => {
       await singInUserFirebase(username, password)
         .then(userCred => {
           Alert.alert('Login Success');
-          console.log(userCred.user.uid);
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'bottomNav', params: {username, password}}],
-          });
+          if (userCred !== null) {
+            loadUser(userCred.user.uid, username); // fetch the user
+          }
         })
         .catch(error => {
           if (error.code === 'auth/invalid-email') {
@@ -69,6 +70,23 @@ const LoginScreen = ({navigation}) => {
     } catch (error) {
       Alert.alert(`Error ${error}`);
     }
+  }
+  async function loadUser(userID: String, email: String) {
+    const loadedUser = await fetchUser(userID);
+    const newUser: User = {
+      email: email.toString(),
+      userId: userID.toString(),
+      username: 'Vidusha Dilshan',
+    };
+    if (!newUser) {
+      return;
+    }
+    setActiveUser(newUser);
+    console.log(newUser);
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'bottomNav', params: {username, password}}],
+    });
   }
   return (
     <View style={styles.mainBody}>
