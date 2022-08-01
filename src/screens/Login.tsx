@@ -69,7 +69,7 @@ const LoginScreen = ({navigation}) => {
     setActiveUser(loadedUser);
     navigation.reset({
       index: 0,
-      routes: [{name: 'bottomNav', params: {username, password}}],
+      routes: [{name: 'bottomNav'}],
     });
   }
   return (

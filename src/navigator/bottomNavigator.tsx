@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // Fonts
 import AntIcon from 'react-native-vector-icons/AntDesign';
 
-if (Platform.OS === 'ios'){
+if (Platform.OS === 'ios') {
   //Load fonts if using use_frameworks
   AntIcon.loadFont();
 }
@@ -18,8 +18,7 @@ import {LogoutScreen} from '../components/logoutScreen';
 
 const Tab = createBottomTabNavigator();
 
-export const BottomNavigator = ({route}) => {
-  const username = route.params.username;
+export const BottomNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName={'home'}
@@ -48,7 +47,6 @@ export const BottomNavigator = ({route}) => {
           title: 'Home Screen',
           tabBarIcon: ({color}) => <AntIcon name="home" size={32} />,
         }}
-        initialParams={{username: username}}
       />
       <Tab.Screen
         name="calendar"

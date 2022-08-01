@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -10,11 +10,10 @@ import {
 
 import Header from '../components/Header';
 import ListItem from '../components/ListItem';
-import {AppStateContext, useAppData} from '../providers/AppState';
+import {useAppData} from '../providers/AppState';
 import {IToDo} from '../resources/ITToDo';
 
-const HomeScreen = ({navigation, route, props}) => {
-  const username = route.params.username;
+const HomeScreen = ({navigation, props}) => {
   const [toDoList, setToDos] = useState<IToDo[]>([
     {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
     {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
