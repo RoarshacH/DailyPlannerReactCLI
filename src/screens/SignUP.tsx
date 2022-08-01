@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
-import {validateEmail} from '../helpers';
+import {validateInputsSignUp} from '../helpers';
 import {signupUserFirebase} from '../services/apiService';
 
 const SignUpScreen = ({navigation}) => {
@@ -27,29 +27,19 @@ const SignUpScreen = ({navigation}) => {
   };
 
   async function handleSubmit() {
-    if (username === '') {
-      setErrorMsg('Username is Empty');
-      setError(true);
-      return;
-    }
-    if (password === '') {
-      setErrorMsg('Password is Empty');
-      setError(true);
-      return;
-    }
-    if (email != confirmEmail) {
-      setErrorMsg('Email and Confirm Email Does not match');
-      setError(true);
-      return;
-    }
-    if (!validateEmail(email)) {
-      setErrorMsg('Email is Inorrect');
-      setError(true);
+    const result = validateInputsSignUp(
+      username,
+      email,
+      confirmEmail,
+      password,
+    );
+    if (result.error) {
+      setErrorMsg(result.msg);
+      setError(result.error);
       return;
     }
     setErrorMsg('');
     setError(false);
-
     try {
       await signupUserFirebase(email, password)
         .then(() => {

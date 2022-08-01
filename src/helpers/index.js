@@ -23,3 +23,25 @@ export const validateInputsLogin = (email, password) => {
   }
   return {msg, error};
 };
+
+export const validateInputsSignUp = (username, email, confEmail, password) => {
+  var error = false;
+  var msg = '';
+  if (username === '') {
+    msg = 'Username is Empty';
+    error = true;
+  }
+  if (password === '') {
+    msg = 'Password is Empty';
+    error = true;
+  }
+  if (email != confEmail) {
+    msg = 'Email and Confirm Email Does not match';
+    error = true;
+  }
+  if (!validateEmail(email)) {
+    msg = 'Email is Inorrect';
+    error = true;
+  }
+  return {msg, error};
+};
