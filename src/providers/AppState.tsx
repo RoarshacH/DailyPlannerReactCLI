@@ -1,16 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {AppState, View} from 'react-native';
-import {AppData, User} from '../resources/ITUser';
-
-const activeUser: User = {
-  username: 'Hello',
-  email: 'test@test.com',
-  userId: '343gsrgs',
-};
-
-const initialAppData = {
-  activeUser: activeUser,
-};
+import {User} from '../resources/ITUser';
 
 export interface AppdataProvider {
   activeUser: User;
