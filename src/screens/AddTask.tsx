@@ -11,6 +11,7 @@ import {
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import DateTimePicker from '../components/DateTimePicker';
 import {IToDo} from '../resources/ITToDo';
+import {addTask} from '../services/dbService';
 
 if (Platform.OS === 'ios') {
   //Load fonts if using use_frameworks
@@ -22,23 +23,48 @@ export default function AddTaskScreen({navigation}) {
   const [taskPriority, setPriority] = useState<String>('');
   const [taskNotes, setNotes] = useState<String>('');
   const [taskDeadline, setDeadline] = useState<Date>(new Date());
-
   const [error, setError] = useState<Boolean>(false);
 
+  var tempDate: Date = taskDeadline;
   const resetError = () => {
     setError(false);
   };
 
+  const getDateTime = (gotDate: Date) => {
+    if (gotDate != null) {
+      setDeadline(gotDate);
+      console.log(gotDate);
+    }
+  };
+
+  const clearAll = () => {
+    resetError();
+    setTitle('');
+    setPriority('');
+    setNotes('');
+    setDeadline(new Date());
+  };
+
   const setToDo = () => {
-    var toDo: IToDo = {
-      text: taskTitle.toString(),
-      completed: false,
-      date: taskDeadline.toISOString(),
-      deadline: taskDeadline,
-      priority: taskPriority.toString(),
-      notes: taskNotes.toString(),
-    };
-    console.log(toDo);
+    if (taskTitle == '' && taskPriority == '' && taskDeadline == tempDate) {
+      Alert.alert('Plsese Fill in the fields');
+    } else {
+      var toDo: IToDo = {
+        text: taskTitle.toString(),
+        completed: false,
+        date: taskDeadline.toISOString(),
+        deadline: taskDeadline,
+        priority: taskPriority.toString(),
+        notes: taskNotes.toString(),
+      };
+      console.log(toDo);
+      addTask(toDo).then((result: boolean) => {
+        if (result) {
+          navigation.navigate('bottomNav');
+        }
+      });
+      navigation.navigate('bottomNav');
+    }
   };
 
   return (
@@ -79,27 +105,7 @@ export default function AddTaskScreen({navigation}) {
 
       <Text>Pick Remainder Date Time</Text>
       <View style={{flexDirection: 'row'}}>
-        <DateTimePicker />
-      </View>
-
-      <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity
-          style={styles.dateButtonStyle}
-          activeOpacity={0.5}
-          onPress={() => Alert.alert('Pick Date and Time')}>
-          <Text style={styles.buttonTextStyle}>
-            <AntIcon name="calendar" size={28} />
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.dateButtonStyle}
-          activeOpacity={0.5}
-          onPress={() => Alert.alert('Pick Date and Time')}>
-          <Text style={styles.buttonTextStyle}>
-            <AntIcon name="clockcircleo" size={28} />
-          </Text>
-        </TouchableOpacity>
+        <DateTimePicker dateTime={getDateTime} />
       </View>
 
       <View style={{flexDirection: 'row'}}>
@@ -178,17 +184,5 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     paddingVertical: 10,
     fontSize: 16,
-  },
-
-  dateButtonStyle: {
-    backgroundColor: '#4A57A3',
-    width: 50,
-    height: 50,
-    borderRadius: 10,
-    borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: '#7DE24E',
-    alignItems: 'center',
-    margin: 10,
   },
 });

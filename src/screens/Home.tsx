@@ -11,12 +11,10 @@ import Header from '../components/Header';
 import ListItem from '../components/ListItem';
 import {useAppData} from '../providers/AppState';
 import {IToDo} from '../resources/ITToDo';
+import {GetAllTasks} from '../services/dbService';
 
 const HomeScreen = ({navigation}) => {
   const [toDoList, setToDos] = useState<IToDo[]>([
-    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
-    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
-    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
     {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
     {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
   ]);
@@ -26,6 +24,17 @@ const HomeScreen = ({navigation}) => {
     const newToDoList = [...toDoList];
     newToDoList[index].completed = !newToDoList[index].completed;
     setToDos(newToDoList);
+    getTasks();
+  };
+
+  const getTasks = async () => {
+    var myTasks = await GetAllTasks();
+    if (myTasks != null) {
+      myTasks.forEach((task: IToDo) => {
+        console.log('ToDoDB' + task.text);
+        toDoList.push(task);
+      });
+    }
   };
 
   return (

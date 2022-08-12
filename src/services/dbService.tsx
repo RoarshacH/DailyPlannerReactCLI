@@ -1,4 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
+import {Alert} from 'react-native';
 import {IToDo} from '../resources/ITToDo';
 import {User} from '../resources/ITUser';
 
@@ -48,30 +49,61 @@ export async function addTask(task: IToDo): Promise<any> {
     .collection('Tasks')
     .add(task)
     .then(() => {
+      Alert.alert('New Task Added');
       console.log('Task added!');
+      return true;
+    })
+    .catch(e => {
+      Alert.alert('Error Adding Task');
+      return false;
     });
 }
 
-export async function GetAllTasks(): Promise<any> {
+export async function GetAllTasks(): Promise<IToDo[]> {
   var todoList: IToDo[] = [];
-  firestore()
+  var snapShot = firestore()
     .collection('Tasks')
     // Filter results
     .where('completed', '==', false)
-    .orderBy('date')
     // Limit results
     .limit(2)
     .get()
     .then(querySnapshot => {
-      /* ... */
-      querySnapshot.forEach(doc => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, ' => ', doc.data());
-        var todo: IToDo = doc.data() as IToDo;
-        todo.id = doc.id;
-        todoList.push(todo);
-      });
+      return querySnapshot;
     });
+
+  if ((await snapShot).empty) {
+    console.log('No results');
+    return todoList;
+  } else {
+    (await snapShot).docs.forEach(doc => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, ' => ', doc.data());
+      var todo: IToDo = doc.data() as IToDo;
+      todo.id = doc.id;
+      todoList.push(todo);
+    });
+    return todoList;
+  }
+
+  //   firestore()
+  //     .collection('Tasks')
+  //     // Filter results
+  //     .where('completed', '==', false)
+  //     .orderBy('date')
+  //     // Limit results
+  //     .limit(2)
+  //     .get()
+  //     .then(querySnapshot => {
+  //       /* ... */
+  //       querySnapshot.forEach(doc => {
+  //         // doc.data() is never undefined for query doc snapshots
+  //         console.log(doc.id, ' => ', doc.data());
+  //         var todo: IToDo = doc.data() as IToDo;
+  //         todo.id = doc.id;
+  //         todoList.push(todo);
+  //       });
+  //     });
 }
 
 export async function UpdateTask(taskID: String, task: IToDo): Promise<any> {
