@@ -12,6 +12,7 @@ import {
 
 import {validateInputsSignUp} from '../helpers';
 import {signupUserFirebase} from '../services/apiService';
+import {addUser} from '../services/dbService';
 
 const SignUpScreen = ({navigation}) => {
   const [username, setUsername] = useState<String>('');
@@ -28,10 +29,10 @@ const SignUpScreen = ({navigation}) => {
 
   async function handleSubmit() {
     const result = validateInputsSignUp(
-      username,
-      email,
-      confirmEmail,
-      password,
+      username.trim(),
+      email.trim(),
+      confirmEmail.trim(),
+      password.trim(),
     );
     if (result.error) {
       setErrorMsg(result.msg);
@@ -41,8 +42,10 @@ const SignUpScreen = ({navigation}) => {
     setErrorMsg('');
     setError(false);
     try {
-      await signupUserFirebase(email, password)
-        .then(() => {
+      await signupUserFirebase(email.trim(), password.trim())
+        .then(resp => {
+          console.log(resp.user.uid);
+          addUser(resp.user.uid, username.trim(), email.trim());
           Alert.alert('User Created Successfully');
           navigation.reset({
             index: 0,

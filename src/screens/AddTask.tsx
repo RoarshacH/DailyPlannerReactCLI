@@ -6,33 +6,62 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  Platform
+  Platform,
 } from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 
-if (Platform.OS === 'ios'){
+if (Platform.OS === 'ios') {
   //Load fonts if using use_frameworks
   AntIcon.loadFont();
 }
 
 export default function AddTaskScreen({navigation}) {
+  const [taskTitle, setTitle] = useState<String>('');
+  const [taskPriority, setPriority] = useState<String>('');
+  const [taskNotes, setNotes] = useState<String>('');
+  const [taskDeadline, setDeadline] = useState<Date>(new Date());
+
+  const [error, setError] = useState<Boolean>(false);
+
+  const resetError = () => {
+    setError(false);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.size}>
         {'\n'} {'\n'} Add your task {'\n'}{' '}
       </Text>
 
-      <Text style={styles.textStyle}>Enter Task Title</Text>
+      <Text>Enter Task Title</Text>
 
-      <TextInput style={styles.input} />
+      <TextInput
+        style={styles.input}
+        textAlign={'center'}
+        onChange={resetError}
+        onChangeText={setTitle}
+        clearTextOnFocus
+      />
 
       <Text style={styles.textStyle}> Enter Task Priority </Text>
 
-      <TextInput style={styles.input} />
+      <TextInput
+        style={styles.input}
+        textAlign={'center'}
+        onChange={resetError}
+        onChangeText={setPriority}
+        clearTextOnFocus
+      />
 
       <Text style={styles.textStyle}>Any Notes?</Text>
 
-      <TextInput style={styles.notes} />
+      <TextInput
+        style={styles.notes}
+        textAlign={'center'}
+        onChange={resetError}
+        onChangeText={setNotes}
+        clearTextOnFocus
+      />
 
       <Text>Pick Remainder Date Time</Text>
       <View style={{flexDirection: 'row'}}>

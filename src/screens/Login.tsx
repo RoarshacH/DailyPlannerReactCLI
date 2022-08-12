@@ -21,6 +21,8 @@ if (Platform.OS === 'ios') {
 
 import {fetchUser, singInUserFirebase} from '../services/apiService';
 import {useAppData} from '../providers/AppState';
+import {getUser} from '../services/dbService';
+import {User} from '../resources/ITUser';
 
 const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState<String>('');
@@ -35,7 +37,7 @@ const LoginScreen = ({navigation}) => {
   };
 
   async function handleLogin() {
-    const result = validateInputsLogin(username, password);
+    const result = validateInputsLogin(username.trim(), password.trim());
     if (result.error) {
       setErrorMsg(result.msg);
       setError(result.error);
@@ -44,7 +46,7 @@ const LoginScreen = ({navigation}) => {
     setErrorMsg('');
     setError(false);
     try {
-      await singInUserFirebase(username, password)
+      await singInUserFirebase(username.trim(), password.trim())
         .then(userCred => {
           Alert.alert('Login Success');
           if (userCred !== null) {
@@ -63,14 +65,17 @@ const LoginScreen = ({navigation}) => {
   }
   async function loadUser(userID: String, email: String) {
     const loadedUser = await fetchUser(userID);
-    if (!loadedUser) {
+    const lUser: User = (await getUser(userID)) as User;
+    if (!lUser) {
+      Alert.alert('Error Getting the User');
       return;
+    } else {
+      setActiveUser(lUser);
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'bottomNav'}],
+      });
     }
-    setActiveUser(loadedUser);
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'bottomNav'}],
-    });
   }
   return (
     <View style={styles.mainBody}>

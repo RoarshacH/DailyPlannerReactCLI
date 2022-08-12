@@ -30,7 +30,7 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <View style={styles.wrapper}>
-      <Header headerTitle={activeUser.email}></Header>
+      <Header headerTitle={activeUser.username}></Header>
       <ScrollView style={{flex: 1}}>
         <View style={styles.bodyTop}>
           {toDoList.map((toDo: IToDo, index: number) => {
