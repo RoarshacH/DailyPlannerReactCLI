@@ -9,6 +9,8 @@ import {
   Platform,
 } from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
+import DateTimePicker from '../components/DateTimePicker';
+import {IToDo} from '../resources/ITToDo';
 
 if (Platform.OS === 'ios') {
   //Load fonts if using use_frameworks
@@ -25,6 +27,18 @@ export default function AddTaskScreen({navigation}) {
 
   const resetError = () => {
     setError(false);
+  };
+
+  const setToDo = () => {
+    var toDo: IToDo = {
+      text: taskTitle.toString(),
+      completed: false,
+      date: taskDeadline.toISOString(),
+      deadline: taskDeadline,
+      priority: taskPriority.toString(),
+      notes: taskNotes.toString(),
+    };
+    console.log(toDo);
   };
 
   return (
@@ -65,6 +79,10 @@ export default function AddTaskScreen({navigation}) {
 
       <Text>Pick Remainder Date Time</Text>
       <View style={{flexDirection: 'row'}}>
+        <DateTimePicker />
+      </View>
+
+      <View style={{flexDirection: 'row'}}>
         <TouchableOpacity
           style={styles.dateButtonStyle}
           activeOpacity={0.5}
@@ -98,7 +116,7 @@ export default function AddTaskScreen({navigation}) {
           style={styles.buttonStyle}
           activeOpacity={0.5}
           onPress={() => {
-            navigation.goBack();
+            setToDo();
           }}>
           <Text style={styles.buttonTextStyle}>Add Task</Text>
         </TouchableOpacity>

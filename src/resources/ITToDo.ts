@@ -3,4 +3,7 @@ export interface IToDo {
   completed: boolean;
   date: string;
   id?: string;
+  deadline?: Date;
+  notes?: string;
+  priority?: string;
 }
