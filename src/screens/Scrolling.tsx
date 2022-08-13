@@ -21,7 +21,7 @@ const ScrollViewScreen = () => {
     toDoList.splice(0);
     if (myTasks != null) {
       myTasks.forEach((task: IToDo) => {
-        console.log('ToDoDB' + task.text);
+        // console.log('ToDoDB' + task.text);
         toDoList.push(task);
       });
       setLoading(false);

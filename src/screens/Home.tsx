@@ -7,7 +7,6 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import firestore from '@react-native-firebase/firestore';
 
 import Header from '../components/Header';
 import ListItem from '../components/ListItem';
