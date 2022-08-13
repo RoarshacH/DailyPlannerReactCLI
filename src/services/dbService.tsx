@@ -66,7 +66,7 @@ export async function GetAllTasks(): Promise<IToDo[]> {
     // Filter results
     .where('completed', '==', false)
     // Limit results
-    .limit(2)
+    .limit(4)
     .get()
     .then(querySnapshot => {
       return querySnapshot;
@@ -85,25 +85,33 @@ export async function GetAllTasks(): Promise<IToDo[]> {
     });
     return todoList;
   }
+}
 
-  //   firestore()
-  //     .collection('Tasks')
-  //     // Filter results
-  //     .where('completed', '==', false)
-  //     .orderBy('date')
-  //     // Limit results
-  //     .limit(2)
-  //     .get()
-  //     .then(querySnapshot => {
-  //       /* ... */
-  //       querySnapshot.forEach(doc => {
-  //         // doc.data() is never undefined for query doc snapshots
-  //         console.log(doc.id, ' => ', doc.data());
-  //         var todo: IToDo = doc.data() as IToDo;
-  //         todo.id = doc.id;
-  //         todoList.push(todo);
-  //       });
-  //     });
+export async function GetTasks(): Promise<IToDo[]> {
+  var todoList: IToDo[] = [];
+  var snapShot = firestore()
+    .collection('Tasks')
+    // Filter results
+    .where('completed', '==', false)
+    // Limit results
+    .get()
+    .then(querySnapshot => {
+      return querySnapshot;
+    });
+
+  if ((await snapShot).empty) {
+    console.log('No results');
+    return todoList;
+  } else {
+    (await snapShot).docs.forEach(doc => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, ' => ', doc.data());
+      var todo: IToDo = doc.data() as IToDo;
+      todo.id = doc.id;
+      todoList.push(todo);
+    });
+    return todoList;
+  }
 }
 
 export async function UpdateTask(taskID: String, task: IToDo): Promise<any> {

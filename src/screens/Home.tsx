@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   Image,
   ScrollView,
+  Text,
 } from 'react-native';
 
 import Header from '../components/Header';
@@ -14,18 +15,20 @@ import {IToDo} from '../resources/ITToDo';
 import {GetAllTasks} from '../services/dbService';
 
 const HomeScreen = ({navigation}) => {
-  const [toDoList, setToDos] = useState<IToDo[]>([
-    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
-    {text: 'Upcoming Deadline', completed: false, date: 'Time: HH:MM - DD:MM'},
-  ]);
+  const [loading, setLoading] = useState(true);
+  const [toDoList, setToDos] = useState<IToDo[]>([]);
   const {activeUser} = useAppData();
 
   const toggleComplete = (index: number): void => {
     const newToDoList = [...toDoList];
     newToDoList[index].completed = !newToDoList[index].completed;
     setToDos(newToDoList);
-    getTasks();
   };
+
+  useEffect(() => {
+    setLoading(true);
+    getTasks();
+  }, []);
 
   const getTasks = async () => {
     var myTasks = await GetAllTasks();
@@ -34,6 +37,7 @@ const HomeScreen = ({navigation}) => {
         console.log('ToDoDB' + task.text);
         toDoList.push(task);
       });
+      setLoading(false);
     }
   };
 
@@ -42,18 +46,24 @@ const HomeScreen = ({navigation}) => {
       <Header headerTitle={activeUser.username}></Header>
       <ScrollView style={{flex: 1}}>
         <View style={styles.bodyTop}>
-          {toDoList.map((toDo: IToDo, index: number) => {
-            return (
-              <ListItem
-                key={index}
-                index={index}
-                title={toDo.text}
-                date={toDo.date}
-                completed={toDo.completed}
-                toggleComplete={toggleComplete}
-              />
-            );
-          })}
+          {loading ? (
+            <Text>No ToDo Items</Text>
+          ) : (
+            <View>
+              {toDoList.map((toDo: IToDo, index: number) => {
+                return (
+                  <ListItem
+                    key={index}
+                    index={index}
+                    title={toDo.text}
+                    date={toDo.date}
+                    completed={toDo.completed}
+                    toggleComplete={toggleComplete}
+                  />
+                );
+              })}
+            </View>
+          )}
         </View>
       </ScrollView>
 
