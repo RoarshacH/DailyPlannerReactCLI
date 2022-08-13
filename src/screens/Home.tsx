@@ -7,6 +7,7 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 
 import Header from '../components/Header';
 import ListItem from '../components/ListItem';
@@ -16,6 +17,7 @@ import {GetAllTasks} from '../services/dbService';
 
 const HomeScreen = ({navigation}) => {
   const [loading, setLoading] = useState(true);
+  const [newData, setNewData] = useState(false);
   const [toDoList, setToDos] = useState<IToDo[]>([]);
   const {activeUser} = useAppData();
 
@@ -32,6 +34,7 @@ const HomeScreen = ({navigation}) => {
 
   const getTasks = async () => {
     var myTasks = await GetAllTasks();
+    toDoList.splice(0);
     if (myTasks != null) {
       myTasks.forEach((task: IToDo) => {
         console.log('ToDoDB' + task.text);
