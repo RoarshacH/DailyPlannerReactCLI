@@ -57,7 +57,6 @@ const LoginScreen = ({navigation}) => {
           if (error.code === 'auth/invalid-email') {
             Alert.alert('Invalid Email');
           }
-          console.error(error);
         });
     } catch (error) {
       Alert.alert(`Error ${error}`);

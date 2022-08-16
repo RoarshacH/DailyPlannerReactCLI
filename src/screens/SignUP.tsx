@@ -60,8 +60,6 @@ const SignUpScreen = ({navigation}) => {
           if (error.code === 'auth/invalid-email') {
             Alert.alert('That email address is invalid!!');
           }
-
-          console.error(error);
         });
     } catch (error) {
       Alert.alert(`Error ${error}`);

@@ -20,7 +20,6 @@ const DateTimePicker = ({dateTime}) => {
   };
 
   const handleConfirm = (date: Date) => {
-    console.warn('A date has been picked: ', date);
     dateTime(date);
     hideDatePicker();
   };
