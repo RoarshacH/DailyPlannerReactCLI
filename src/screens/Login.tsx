@@ -56,6 +56,8 @@ const LoginScreen = ({navigation}) => {
         .catch(error => {
           if (error.code === 'auth/invalid-email') {
             Alert.alert('Invalid Email');
+          } else {
+            Alert.alert('Your Email or Password is incorrect');
           }
         });
     } catch (error) {

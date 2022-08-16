@@ -8,15 +8,18 @@ import {
   Text,
 } from 'react-native';
 
+import {useIsFocused} from '@react-navigation/native';
+
 import Header from '../components/Header';
 import ListItem from '../components/ListItem';
 import {useAppData} from '../providers/AppState';
 import {IToDo} from '../resources/ITToDo';
-import {GetAllTasks} from '../services/dbService';
+import {GetAllTasks, UpdateTask} from '../services/dbService';
 
 const HomeScreen = ({navigation}) => {
+  const isFocused = useIsFocused();
+
   const [loading, setLoading] = useState(true);
-  const [newData, setNewData] = useState(false);
   const [toDoList, setToDos] = useState<IToDo[]>([]);
   const {activeUser} = useAppData();
 
@@ -24,19 +27,23 @@ const HomeScreen = ({navigation}) => {
     const newToDoList = [...toDoList];
     newToDoList[index].completed = !newToDoList[index].completed;
     setToDos(newToDoList);
+    var task: IToDo = newToDoList[index];
+    var id = task.id!;
+    UpdateTask(id, task);
   };
 
   useEffect(() => {
-    setLoading(true);
-    getTasks();
-  }, []);
+    if (isFocused) {
+      setLoading(true);
+      getTasks();
+    }
+  }, [isFocused]);
 
   const getTasks = async () => {
     var myTasks = await GetAllTasks();
     toDoList.splice(0);
     if (myTasks != null) {
       myTasks.forEach((task: IToDo) => {
-        console.log('ToDoDB' + task.text);
         toDoList.push(task);
       });
       setLoading(false);

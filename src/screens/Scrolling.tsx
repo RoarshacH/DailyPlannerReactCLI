@@ -1,19 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, ScrollView, Text} from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
 import ListItem from '../components/ListItem';
 
 import {IToDo} from '../resources/ITToDo';
-import {GetTasks} from '../services/dbService';
+import {GetTasks, UpdateTask} from '../services/dbService';
 
 const ScrollViewScreen = () => {
-  // Just for test
   const [toDoList, setToDos] = useState<IToDo[]>([]);
   const [loading, setLoading] = useState(true);
+  const isFocused = useIsFocused();
 
   const toggleComplete = (index: number): void => {
     const newToDoList = [...toDoList];
     newToDoList[index].completed = !newToDoList[index].completed;
     setToDos(newToDoList);
+    var task: IToDo = newToDoList[index];
+    var id = task.id!;
+    UpdateTask(id, task);
   };
 
   const getTasks = async () => {
@@ -21,7 +25,6 @@ const ScrollViewScreen = () => {
     toDoList.splice(0);
     if (myTasks != null) {
       myTasks.forEach((task: IToDo) => {
-        // console.log('ToDoDB' + task.text);
         toDoList.push(task);
       });
       setLoading(false);
@@ -29,9 +32,11 @@ const ScrollViewScreen = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    getTasks();
-  }, []);
+    if (isFocused) {
+      setLoading(true);
+      getTasks();
+    }
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>

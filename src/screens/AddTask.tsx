@@ -56,6 +56,7 @@ export default function AddTaskScreen({navigation}) {
         deadline: taskDeadline,
         priority: taskPriority.toString(),
         notes: taskNotes.toString(),
+        dlMilisTime: Math.floor(taskDeadline.getTime() / 1000),
       };
       console.log(toDo);
       addTask(toDo).then((result: boolean) => {

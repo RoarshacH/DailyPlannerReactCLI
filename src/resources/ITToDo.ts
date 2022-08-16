@@ -6,4 +6,5 @@ export interface IToDo {
   deadline?: Date;
   notes?: string;
   priority?: string;
+  dlMilisTime?: number;
 }

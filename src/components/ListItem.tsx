@@ -41,13 +41,13 @@ const ListItem = prop => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: '70%',
-    height: 80,
+    width: 300,
+    height: 100,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#D0D0E3',
     margin: 10,
-    padding: 5,
+    padding: 8,
     borderRadius: 10,
   },
   doneButtonStyle: {

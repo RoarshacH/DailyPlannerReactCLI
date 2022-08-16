@@ -1,32 +1,49 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet, Text} from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
 
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {Calendar} from 'react-native-calendars';
+import {IToDo} from '../resources/ITToDo';
+import {GetTasks} from '../services/dbService';
+import {getStringDate} from '../helpers';
 
 const CalendarScreen = () => {
+  const datesMarked: any = {'2022-08-15': {marked: true, dotColor: '#50cebb'}};
+  const [toDoList, setToDos] = useState<IToDo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const isFocused = useIsFocused();
+
+  const getTasks = async () => {
+    var myTasks = await GetTasks();
+    toDoList.splice(0);
+    if (myTasks != null) {
+      myTasks.forEach((task: IToDo) => {
+        toDoList.push(task);
+        var timestamp = task.deadline;
+        var strDate = getStringDate(timestamp);
+        datesMarked[strDate] = {marked: true, dotColor: '#50cebb'};
+      });
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isFocused) {
+      setLoading(true);
+      getTasks();
+    }
+  }, [isFocused]);
+
   return (
     <View style={styles.wrapper}>
       <View style={[styles.content]}>
-        <Calendar
-          style={styles.calandar}
-          markingType="multi-period"
-          markedDates={{
-            '2017-12-14': {
-              periods: [
-                {startingDay: false, endingDay: true, color: '#5f9ea0'},
-                {startingDay: false, endingDay: true, color: '#ffa500'},
-                {startingDay: true, endingDay: false, color: '#f0e68c'},
-              ],
-            },
-            '2017-12-15': {
-              periods: [
-                {startingDay: true, endingDay: false, color: '#ffa500'},
-                {color: 'transparent'},
-                {startingDay: false, endingDay: false, color: '#f0e68c'},
-              ],
-            },
-          }}
-        />
+        {loading ? (
+          <Text>Items Loading</Text>
+        ) : (
+          <>
+            <Calendar style={styles.calandar} markedDates={datesMarked} />
+          </>
+        )}
       </View>
     </View>
   );

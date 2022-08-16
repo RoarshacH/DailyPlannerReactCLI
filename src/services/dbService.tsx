@@ -18,7 +18,7 @@ export async function addUser(
     .doc(userId.toString())
     .set(user)
     .then(() => {
-      console.log('User added!');
+      // console.log('User added!');
     });
 }
 
@@ -33,7 +33,7 @@ export async function getUser(userId: String): Promise<any> {
 
   if ((await user).exists) {
     var newUser: User = (await user).data() as User;
-    console.log(newUser);
+    // console.log(newUser);
     return newUser;
   } else {
     return {
@@ -50,7 +50,6 @@ export async function addTask(task: IToDo): Promise<any> {
     .add(task)
     .then(() => {
       Alert.alert('New Task Added');
-      console.log('Task added!');
       return true;
     })
     .catch(e => {
@@ -65,6 +64,7 @@ export async function GetAllTasks(): Promise<IToDo[]> {
     .collection('Tasks')
     // Filter results
     .where('completed', '==', false)
+    .orderBy('deadline')
     // Limit results
     .limit(4)
     .get()
@@ -77,8 +77,6 @@ export async function GetAllTasks(): Promise<IToDo[]> {
     return todoList;
   } else {
     (await snapShot).docs.forEach(doc => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, ' => ', doc.data());
       var todo: IToDo = doc.data() as IToDo;
       todo.id = doc.id;
       todoList.push(todo);
@@ -88,11 +86,14 @@ export async function GetAllTasks(): Promise<IToDo[]> {
 }
 
 export async function GetTasks(): Promise<IToDo[]> {
+  var datemin = new Date();
+  var today = Math.floor(datemin.getTime() / 1000);
   var todoList: IToDo[] = [];
   var snapShot = firestore()
     .collection('Tasks')
     // Filter results
-    .where('completed', '==', false)
+    .where('dlMilisTime', '>=', today)
+    .orderBy('dlMilisTime')
     // Limit results
     .get()
     .then(querySnapshot => {
@@ -105,7 +106,7 @@ export async function GetTasks(): Promise<IToDo[]> {
   } else {
     (await snapShot).docs.forEach(doc => {
       // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, ' => ', doc.data());
+      // console.log(doc.id, ' => ', doc.data());
       var todo: IToDo = doc.data() as IToDo;
       todo.id = doc.id;
       todoList.push(todo);
@@ -119,9 +120,14 @@ export async function UpdateTask(taskID: String, task: IToDo): Promise<any> {
     .collection('Tasks')
     .doc(taskID.toString())
     .update({
-      'info.address.zipcode': 94040,
+      completed: task.completed,
     })
     .then(() => {
-      console.log('User updated!');
+      Alert.alert('Task Updated');
     });
 }
+
+export const updateTasks = async (task: IToDo) => {
+  var id = task.id!;
+  var myTasks = await UpdateTask(id, task);
+};

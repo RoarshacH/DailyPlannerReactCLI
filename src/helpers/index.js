@@ -45,3 +45,19 @@ export const validateInputsSignUp = (username, email, confEmail, password) => {
   }
   return {msg, error};
 };
+
+export const getStringDate = timestamp => {
+  var date = new Date(
+    timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000,
+  );
+
+  var month = date.getUTCMonth() + 1; //months from 1-12
+  var day = date.getUTCDate();
+  var year = date.getUTCFullYear();
+
+  if (month <= 9) {
+    return year + '-0' + month + '-' + day;
+  } else {
+    return year + '-' + month + '-' + day;
+  }
+};
